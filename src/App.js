@@ -18,7 +18,7 @@ function App() {
     toAmount = amount * exchangeRate
   } else {
     toAmount = amount
-    fromAmount = amount / exchangeRate
+    fromAmount = amount / exchangeRate || 0
   }
 
   useEffect(() =>{
@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if(fromCurrency != null && toCurrency != null) {
+    if(fromCurrency !== undefined && toCurrency !== undefined) {
       fetch(`${BASE_URL}?base_code=${fromCurrency}&symbols=${toCurrency}`)
         .then(res => res.json())
         .then(data => setExchangeRate(data.conversion_rates[toCurrency]))   
